@@ -1,0 +1,100 @@
+{
+	"name": "IfCondition",
+	"properties": {
+		"activities": [
+			{
+				"name": "If Condition1",
+				"type": "IfCondition",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"expression": {
+						"value": "@contains(variables('ListOfCities'),pipeline().parameters.CityToSearch)",
+						"type": "Expression"
+					},
+					"ifFalseActivities": [
+						{
+							"name": "Set variable2",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "CityFound",
+								"value": false
+							}
+						}
+					],
+					"ifTrueActivities": [
+						{
+							"name": "Set variable1",
+							"type": "SetVariable",
+							"dependsOn": [],
+							"policy": {
+								"secureOutput": false,
+								"secureInput": false
+							},
+							"userProperties": [],
+							"typeProperties": {
+								"variableName": "CityFound",
+								"value": true
+							}
+						}
+					]
+				}
+			},
+			{
+				"name": "Set variable3",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "If Condition1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "CityFoundFinalStatus",
+					"value": {
+						"value": "@variables('CityFound')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"parameters": {
+			"CityToSearch": {
+				"type": "string",
+				"defaultValue": "None"
+			}
+		},
+		"variables": {
+			"ListOfCities": {
+				"type": "Array",
+				"defaultValue": [
+					"Bengaluru",
+					"Pune",
+					"Mumbai"
+				]
+			},
+			"CityFound": {
+				"type": "Boolean"
+			},
+			"CityFoundFinalStatus": {
+				"type": "Boolean"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-10-24T16:34:17Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

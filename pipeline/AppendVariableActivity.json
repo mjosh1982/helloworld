@@ -1,0 +1,57 @@
+{
+	"name": "AppendVariableActivity",
+	"properties": {
+		"activities": [
+			{
+				"name": "Append variable1",
+				"type": "AppendVariable",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "FileNames",
+					"value": "4.csv"
+				}
+			},
+			{
+				"name": "AppendFileNames",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Append variable1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "FinalFileNames",
+					"value": {
+						"value": "@variables('FileNames')",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"FileNames": {
+				"type": "Array",
+				"defaultValue": [
+					"1.csv",
+					"2.csv",
+					"3.csv"
+				]
+			},
+			"FinalFileNames": {
+				"type": "Array"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-10-24T16:17:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

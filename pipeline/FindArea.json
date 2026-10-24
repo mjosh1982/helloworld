@@ -1,0 +1,81 @@
+{
+	"name": "FindArea",
+	"properties": {
+		"activities": [
+			{
+				"name": "Set Length",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Length",
+					"value": "30"
+				}
+			},
+			{
+				"name": "Set Breadth",
+				"type": "SetVariable",
+				"dependsOn": [],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Beadth",
+					"value": "30"
+				}
+			},
+			{
+				"name": "Calculate Area",
+				"type": "SetVariable",
+				"dependsOn": [
+					{
+						"activity": "Set Breadth",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					},
+					{
+						"activity": "Set Length",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"variableName": "Area",
+					"value": {
+						"value": "@string(mul(\n    int(variables('Length')),\n    int(variables('Beadth'))\n))",
+						"type": "Expression"
+					}
+				}
+			}
+		],
+		"variables": {
+			"Length": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"Beadth": {
+				"type": "String",
+				"defaultValue": "0"
+			},
+			"Area": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"lastPublishTime": "2026-10-24T16:17:10Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

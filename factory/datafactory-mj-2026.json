@@ -1,0 +1,15 @@
+{
+	"name": "datafactory-mj-2026",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "50aadb7d-de72-41a5-a9bc-a5d66f1e2d33",
+		"tenantId": "edcb69da-563d-4aa0-a13e-94be9a1d722d"
+	}
+}
